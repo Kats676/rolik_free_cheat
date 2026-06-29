@@ -46,18 +46,18 @@ header {
   font-weight: bold;
 }
 
-/* Главная секция во весь экран */
+/* Главный блок (Верхний экран) */
 .hero-section {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 60px 20px;
+  padding: 100px 20px;
   background-image: linear-gradient(to bottom, rgba(7,7,7,0.4), #070707), url('banner.jpg');
   background-size: cover;
   background-position: center;
-  min-height: calc(100vh - 75px); /* Занимает весь экран за вычетом шапки */
+  min-height: 40vh;
   box-sizing: border-box;
 }
 .hero-title {
@@ -72,11 +72,64 @@ header {
   font-size: 20px;
   color: #aaa;
   max-width: 700px;
-  margin-bottom: 45px;
   line-height: 1.6;
 }
 
-/* Форма привязки */
+/* 
+=========================
+БЛОК ПРЕЗЕНТАЦИИ (КАРТИНКИ РЯДОМ)
+=========================
+*/
+.preview-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px 20px 20px;
+  text-align: center;
+}
+.preview-title {
+  font-size: 36px;
+  font-weight: 900;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+.preview-title span {
+  color: #a855f7;
+  text-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+}
+
+/* Сетка для двух картинок */
+.preview-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap; /* Чтобы на телефонах картинки переносились */
+}
+.preview-box {
+  flex: 1;
+  min-width: 300px;
+  max-width: 550px;
+}
+.preview-box img {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid #1e1e1e;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  transition: 0.3s ease;
+}
+/* Эффект свечения для меню читов */
+.preview-box .menu-img {
+  box-shadow: 0 20px 50px rgba(168, 85, 247, 0.15);
+}
+
+/* Секция с формой (В самом низу перед подвалом) */
+.download-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 20px 100px 20px;
+}
 .form-container {
   background: #0f0f0f;
   border: 1px solid #1a1a1a;
@@ -92,6 +145,7 @@ header {
   font-size: 22px;
   color: #fff;
   font-weight: 600;
+  text-align: center;
 }
 input, select { 
   width: 100%; 
@@ -142,37 +196,7 @@ button:disabled {
   margin-top: 20px; 
   font-size: 14px; 
   color: #888; 
-}
-
-/* 
-=========================
-НИЖНЯЯ СЕКЦИЯ С КАРТИНКОЙ (ПРИ С КРОЛЛЕ НАНИЗ)
-=========================
-*/
-.preview-section {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 80px 20px;
   text-align: center;
-  border-top: 1px solid #111; /* Визуальное разделение экранов */
-}
-.preview-title {
-  font-size: 36px;
-  font-weight: 900;
-  margin-bottom: 40px;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-}
-.preview-title span {
-  color: #a855f7;
-  text-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
-}
-.cheat-screenshot {
-  width: 100%;
-  max-width: 900px;
-  border-radius: 14px;
-  border: 1px solid #1e1e1e;
-  box-shadow: 0 30px 70px rgba(168, 85, 247, 0.12);
 }
 
 /* Подвал */
@@ -200,11 +224,30 @@ footer {
 </header>
 
 <main>
-  <!-- Первый экран: Форма привязки -->
+  <!-- Первый экран: Приветствие -->
   <section class="hero-section">
     <h1 class="hero-title">PHANTOM PREMIUM CLIENT</h1>
     <p class="hero-subtitle">Следующее поколение приватных модификаций. Кастомные обходы и полная автоматизация привязки подписки.</p>
+  </section>
+
+  <!-- Второй экран: Картинки рядом друг с другом -->
+  <section class="preview-section">
+    <div class="preview-title">В НАШЕМ ЧИТЕ БОЛЕЕ <span>100+ ФУНКЦИЙ!</span></div>
     
+    <div class="preview-container">
+      <!-- Новая картинка с персонажем (Слева) -->
+      <div class="preview-box">
+        <img src="hero-view.jpg" alt="Визуальное отображение">
+      </div>
+      <!-- Картинка меню чита (Справа) -->
+      <div class="preview-box">
+        <img src="menu.jpg" alt="Интерфейс чита Phantom" class="menu-img">
+      </div>
+    </div>
+  </section>
+
+  <!-- Третий экран: Форма привязки и Кнопка "Скачать" в самом низу -->
+  <section class="download-section">
     <div class="form-container">
       <h3>Авторизация Premium Лицензии</h3>
       <form id="cheatForm">
@@ -220,12 +263,6 @@ footer {
       </form>
       <div class="status" id="statusText"></div>
     </div>
-  </section>
-
-  <!-- Второй экран (внизу): Скриншот меню и заголовок -->
-  <section class="preview-section">
-    <div class="preview-title">В НАШЕМ ЧИТЕ БОЛЕЕ <span>100+ ФУНКЦИЙ!</span></div>
-    <img src="menu.jpg" alt="Интерфейс чита Phantom" class="cheat-screenshot">
   </section>
 </main>
 
@@ -281,3 +318,4 @@ document.getElementById('cheatForm').addEventListener('submit', async function(e
 </script>
 </body>
 </html>
+
