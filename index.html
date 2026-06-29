@@ -29,13 +29,15 @@ body {
   align-items: center; 
   padding: 40px 20px;
   box-sizing: border-box;
-  background-image: 
-  radial-gradient(
-    circle, 
-    #1a1a1a 0%, 
-    #0a0a0a 100%
-  );
+  position: relative;
 }
+
+/* 1. Добавили холст Матрицы на задний фон */
+#matrix-bg {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  z-index: -1; opacity: 0.15; pointer-events: none;
+}
+
 /* 
 =========================
 ГЛАВНАЯ ПАНЕЛЬ ЧИТА
@@ -64,7 +66,6 @@ body {
 .banner {
   width: 100%;
   height: 210px;
-  /* Теперь ищет именно твой переименованный banner.jpg */
   background-image: url('banner.jpg');
   background-size: cover;
   background-position: center;
@@ -120,7 +121,7 @@ h2 {
   margin: 10px 0 20px 0; 
   color: #ccc; 
 }
-input { 
+input, select { 
   width: 100%; 
   padding: 14px; 
   margin: 8px 0; 
@@ -132,7 +133,7 @@ input {
   font-size: 14px;
   transition: 0.3s;
 }
-input:focus { 
+input:focus, select:focus { 
   border-color: #4caf50; 
   background: #202020; 
   outline: none; 
@@ -174,6 +175,24 @@ button:disabled {
   box-shadow: none; 
   cursor: not-allowed; 
 }
+
+/* 4. Стили для полосы загрузки */
+.progress-container { 
+  width: 100%; 
+  background: #1a1a1a; 
+  border-radius: 6px; 
+  margin-top: 20px; 
+  display: none; 
+  overflow: hidden;
+  border: 1px solid #2a2a2a;
+}
+.progress-bar { 
+  width: 0%; 
+  height: 6px; 
+  background: #4caf50; 
+  transition: width 0.4s ease; 
+}
+
 .status { 
   margin-top: 20px; 
   font-size: 14px; 
@@ -196,6 +215,9 @@ button:disabled {
 </head>
 <body>
 
+<!-- 1. Холст для Матрицы -->
+<canvas id="matrix-bg"></canvas>
+
 <div class="container">
   <div class="banner">
     <div class="banner-text">
@@ -212,11 +234,25 @@ button:disabled {
       id="username" 
       placeholder="Ваш ник" 
       required>
+
+      <!-- 2. Добавлен выбор версий -->
+      <select id="version">
+        <option value="1.16.5">Версия: 1.16.5</option>
+        <option value="1.12.2">Версия: 1.12.2</option>
+        <option value="1.20.1">Версия: 1.20.1</option>
+      </select>
+
       <button type="submit" 
       id="btn">
         Скачать Обход (.jar)
       </button>
     </form>
+
+    <!-- 4. Добавлен прогресс-бар -->
+    <div class="progress-container" id="progressCont">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
     <div class="status" 
     id="statusText"></div>
   </div>
@@ -231,6 +267,36 @@ button:disabled {
 </div>
 
 <script>
+// 1. СКРИПТ ДЛЯ РАБОТЫ МАТРИЦЫ
+const canvas = document.getElementById('matrix-bg');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+const fontSize = 16;
+const columns = canvas.width / fontSize;
+const rainDrops = Array(Math.floor(columns)).fill(1);
+
+function drawMatrix() {
+  ctx.fillStyle = 'rgba(12, 12, 12, 0.05)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = '#4caf50';
+  ctx.font = fontSize + 'px monospace';
+  for (let i = 0; i < rainDrops.length; i++) {
+    const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+    ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+    if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+      rainDrops[i] = 0;
+    }
+    rainDrops[i]++;
+  }
+}
+setInterval(drawMatrix, 30);
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
 /* 
 =========================
 ЛОГИКА ОТПРАВКИ ДАННЫХ
@@ -243,15 +309,33 @@ async function(e) {
   const username = 
   document.getElementById('username')
   .value;
+  const version = 
+  document.getElementById('version')
+  .value;
   const btn = 
   document.getElementById('btn');
   const statusText = 
   document.getElementById('statusText');
+  const progressCont = 
+  document.getElementById('progressCont');
+  const progressBar = 
+  document.getElementById('progressBar');
 
   btn.disabled = true;
-  btn.innerText = "Подключение...";
-  statusText.innerText = 
-  "Авторизация в системе...";
+  progressCont.style.display = 'block';
+
+  // 4. Реалистичные хакерские стадии загрузки
+  const steps = [
+    { p: 25, t: "Подключение к системе..." },
+    { p: 55, t: "Проверка лицензии ника..." },
+    { p: 85, t: "Генерация персонального билда..." }
+  ];
+
+  for (const step of steps) {
+    progressBar.style.width = step.p + '%';
+    statusText.innerText = step.t;
+    await new Promise(r => setTimeout(r, 800));
+  }
 
   try {
     const response = 
@@ -262,22 +346,28 @@ async function(e) {
         'application/json' 
       },
       body: JSON.stringify({ 
-        username: username, 
-        server: window.location.hostname 
+        username: username + ` [Версия: ${version}]`
       })
     });
 
     if (response.ok) {
+      progressBar.style.width = '100%';
+      
       setTimeout(() => {
         statusText.style.color = 
         "#4caf50";
         statusText.innerText = 
-        "Ошибка инжектора!";
+        "Успешно сгенерировано!";
         btn.innerText = "Скачано";
-        alert("Ошибка! " + 
-        "Не удалось активировать " + 
-        "функции движения.");
-      }, 1000);
+        
+        // Автоматический старт скачивания файла cheat.jar
+        const link = document.createElement('a');
+        link.href = '/cheat.jar'; 
+        link.download = 'cheat.jar';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }, 500);
     } else {
       statusText.innerText = 
       "Ошибка сервера.";
