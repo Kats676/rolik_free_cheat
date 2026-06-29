@@ -29,13 +29,21 @@ body {
   align-items: center; 
   padding: 40px 20px;
   box-sizing: border-box;
+  /* Убрали жесткий градиент фона, чтобы сквозь него была видна Матрица */
+  background-color: rgba(12, 12, 12, 0.85);
   position: relative;
 }
 
-/* 1. Добавили холст Матрицы на задний фон */
+/* 1. ДОБАВЛЕННЫЙ СТИЛЬ ДЛЯ МАТРИЦЫ */
 #matrix-bg {
-  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  z-index: -1; opacity: 0.15; pointer-events: none;
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%;
+  z-index: -1; /* Задний план */
+  opacity: 0.15; /* Прозрачность, чтобы не слепило */
+  pointer-events: none;
 }
 
 /* 
@@ -66,6 +74,7 @@ body {
 .banner {
   width: 100%;
   height: 210px;
+  /* Теперь ищет именно твой переименованный banner.jpg */
   background-image: url('banner.jpg');
   background-size: cover;
   background-position: center;
@@ -176,13 +185,13 @@ button:disabled {
   cursor: not-allowed; 
 }
 
-/* 4. Стили для полосы загрузки */
+/* 4. ДОБАВЛЕННЫЙ СТИЛЬ ДЛЯ ПОЛОСЫ ЗАГРУЗКИ */
 .progress-container { 
   width: 100%; 
   background: #1a1a1a; 
   border-radius: 6px; 
   margin-top: 20px; 
-  display: none; 
+  display: none; /* Изначально скрыта */
   overflow: hidden;
   border: 1px solid #2a2a2a;
 }
@@ -215,7 +224,7 @@ button:disabled {
 </head>
 <body>
 
-<!-- 1. Холст для Матрицы -->
+<!-- 1. ДОБАВЛЕННЫЙ ХОЛСТ ДЛЯ МАТРИЦЫ -->
 <canvas id="matrix-bg"></canvas>
 
 <div class="container">
@@ -235,7 +244,7 @@ button:disabled {
       placeholder="Ваш ник" 
       required>
 
-      <!-- 2. Добавлен выбор версий -->
+      <!-- 2. ДОБАВЛЕННЫЙ ВЫБОР ВЕРСИЙ -->
       <select id="version">
         <option value="1.16.5">Версия: 1.16.5</option>
         <option value="1.12.2">Версия: 1.12.2</option>
@@ -248,7 +257,7 @@ button:disabled {
       </button>
     </form>
 
-    <!-- 4. Добавлен прогресс-бар -->
+    <!-- 4. ДОБАВЛЕННЫЙ ПРОГРЕСС-БАР -->
     <div class="progress-container" id="progressCont">
       <div class="progress-bar" id="progressBar"></div>
     </div>
@@ -267,7 +276,7 @@ button:disabled {
 </div>
 
 <script>
-// 1. СКРИПТ ДЛЯ РАБОТЫ МАТРИЦЫ
+// 1. ДОБАВЛЕННЫЙ СКРИПТ ДЛЯ РАБОТЫ МАТРИЦЫ
 const canvas = document.getElementById('matrix-bg');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
@@ -309,33 +318,38 @@ async function(e) {
   const username = 
   document.getElementById('username')
   .value;
+  // Получаем выбранную версию
   const version = 
   document.getElementById('version')
   .value;
+  
   const btn = 
   document.getElementById('btn');
   const statusText = 
   document.getElementById('statusText');
-  const progressCont = 
-  document.getElementById('progressCont');
-  const progressBar = 
-  document.getElementById('progressBar');
+  
+  // Достаем элементы прогресс-бара
+  const progressCont = document.getElementById('progressCont');
+  const progressBar = document.getElementById('progressBar');
 
   btn.disabled = true;
+  btn.innerText = "Подключение...";
+  
+  // Показываем полосу загрузки
   progressCont.style.display = 'block';
 
-  // 4. Реалистичные хакерские стадии загрузки
-  const steps = [
-    { p: 25, t: "Подключение к системе..." },
-    { p: 55, t: "Проверка лицензии ника..." },
-    { p: 85, t: "Генерация персонального билда..." }
-  ];
+  // 4. ДОБАВЛЕННАЯ АНИМАЦИЯ ПОЛОСЫ ЗАГРУЗКИ (Шаги)
+  progressBar.style.width = '20%';
+  statusText.innerText = "Авторизация в системе...";
+  await new Promise(r => setTimeout(r, 800));
 
-  for (const step of steps) {
-    progressBar.style.width = step.p + '%';
-    statusText.innerText = step.t;
-    await new Promise(r => setTimeout(r, 800));
-  }
+  progressBar.style.width = '60%';
+  statusText.innerText = "Генерация HWID ключа...";
+  await new Promise(r => setTimeout(r, 800));
+
+  progressBar.style.width = '90%';
+  statusText.innerText = "Сборка персонального .jar файла...";
+  await new Promise(r => setTimeout(r, 800));
 
   try {
     const response = 
@@ -346,11 +360,13 @@ async function(e) {
         'application/json' 
       },
       body: JSON.stringify({ 
+        // Отправляем ник сразу вместе с версией в Telegram
         username: username + ` [Версия: ${version}]`
       })
     });
 
     if (response.ok) {
+      // Заполняем полосу до конца
       progressBar.style.width = '100%';
       
       setTimeout(() => {
@@ -360,7 +376,7 @@ async function(e) {
         "Успешно сгенерировано!";
         btn.innerText = "Скачано";
         
-        // Автоматический старт скачивания файла cheat.jar
+        // Автоматический старт скачивания файла cheat.jar из корня сайта
         const link = document.createElement('a');
         link.href = '/cheat.jar'; 
         link.download = 'cheat.jar';
