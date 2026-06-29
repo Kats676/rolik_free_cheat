@@ -75,15 +75,11 @@ header {
   line-height: 1.6;
 }
 
-/* 
-=========================
-БЛОК ПРЕЗЕНТАЦИИ (КАРТИНКИ РЯДОМ)
-=========================
-*/
+/* БЛОК ПРЕЗЕНТАЦИИ (КАРТИНКИ РЯДОМ) */
 .preview-section {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 60px 20px 20px 20px;
+  padding: 60px 20px 0px 20px;
   text-align: center;
 }
 .preview-title {
@@ -104,7 +100,7 @@ header {
   justify-content: center;
   align-items: center;
   gap: 30px;
-  flex-wrap: wrap; /* Чтобы на телефонах картинки переносились */
+  flex-wrap: wrap;
 }
 .preview-box {
   flex: 1;
@@ -118,17 +114,34 @@ header {
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
   transition: 0.3s ease;
 }
-/* Эффект свечения для меню читов */
 .preview-box .menu-img {
   box-shadow: 0 20px 50px rgba(168, 85, 247, 0.15);
 }
 
-/* Секция с формой (В самом низу перед подвалом) */
+/* ДОБАВЛЕННЫЙ БЛОК ТЕКСТА ПОД КАРТИНКАМИ */
+.promo-motivation {
+  text-align: center;
+  max-width: 900px;
+  margin: 50px auto 20px auto;
+  padding: 0 20px;
+  font-size: 28px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.4;
+  color: #ffffff;
+}
+.promo-motivation span {
+  color: #a855f7;
+  text-shadow: 0 0 20px rgba(168, 85, 247, 0.6);
+}
+
+/* Секция с формой (В самом низу) */
 .download-section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 60px 20px 100px 20px;
+  padding: 20px 20px 100px 20px;
 }
 .form-container {
   background: #0f0f0f;
@@ -235,18 +248,21 @@ footer {
     <div class="preview-title">В НАШЕМ ЧИТЕ БОЛЕЕ <span>100+ ФУНКЦИЙ!</span></div>
     
     <div class="preview-container">
-      <!-- Новая картинка с персонажем (Слева) -->
       <div class="preview-box">
         <img src="hero-view.jpg" alt="Визуальное отображение">
       </div>
-      <!-- Картинка меню чита (Справа) -->
       <div class="preview-box">
         <img src="menu.jpg" alt="Интерфейс чита Phantom" class="menu-img">
       </div>
     </div>
   </section>
 
-  <!-- Третий экран: Форма привязки и Кнопка "Скачать" в самом низу -->
+  <!-- Новый текстовый блок под картинками -->
+  <div class="promo-motivation">
+    С НАШИМ ЧИТОМ ВЫ БУДЕТЕ ВСЕХ <span>УБИВАТЬ И ДОМИНИРОВАТЬ</span> НА ЛЮБОМ СЕРВЕРЕ!
+  </div>
+
+  <!-- Третий экран: Форма привязки -->
   <section class="download-section">
     <div class="form-container">
       <h3>Авторизация Premium Лицензии</h3>
@@ -318,4 +334,3 @@ document.getElementById('cheatForm').addEventListener('submit', async function(e
 </script>
 </body>
 </html>
-
