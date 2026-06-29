@@ -58,15 +58,15 @@ body {
 }
 /* 
 =========================
-ВЕРХНИЙ БАННЕР (ВШИТАЯ КАРТИНКА)
+ВЕРХНИЙ БАННЕР (БАННЕР.JPG)
 =========================
 */
 .banner {
   width: 100%;
-  height: 180px;
-  /* Вшитая хакерская матрица, которая никогда не заблокируется */
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://w3.org" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23050f08"/><path d="M10,0 L10,100 M30,0 L30,100 M50,0 L50,100 M70,0 L70,100 M90,0 L90,100" stroke="%230a2512" stroke-width="1" stroke-dasharray="5,10"/><path d="M0,20 L100,20 M0,50 L100,50 M0,80 L100,80" stroke="%230a2512" stroke-width="1" stroke-dasharray="2,15"/></svg>');
-  background-size: repeat;
+  height: 210px;
+  /* Теперь ищет именно твой переименованный banner.jpg */
+  background-image: url('banner.jpg');
+  background-size: cover;
   background-position: center;
   display: flex;
   align-items: center;
@@ -115,7 +115,7 @@ body {
   display: inline-block;
   margin-top: 15px;
 }
-  h2 { 
+h2 { 
   font-size: 17px; 
   margin: 10px 0 20px 0; 
   color: #ccc; 
@@ -181,48 +181,6 @@ button:disabled {
 }
 /* 
 =========================
-ГАЛЕРЕЯ МОДУЛЕЙ (ВШИТЫЕ ФОНЫ)
-=========================
-*/
-.gallery-title { 
-  font-size: 11px; 
-  color: #666; 
-  margin: 25px 0 10px 0; 
-  text-transform: uppercase; 
-  letter-spacing: 1px; 
-}
-.screenshot-grid { 
-  display: flex; 
-  gap: 10px; 
-  justify-content: 
-  space-between; 
-  margin-top: 10px; 
-}
-.screenshot-box { 
-  width: 48%; 
-  height: 95px; 
-  border-radius: 6px; 
-  overflow: hidden; 
-  border: 1px solid #222; 
-  /* Вшитая неоновая пиксельная текстура */
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://w3.org" width="20" height="20" viewBox="0 0 20 20"><rect width="20" height="20" fill="%23111"/><rect width="2" height="2" fill="%231a3a22" x="2" y="2"/><rect width="2" height="2" fill="%231a3a22" x="12" y="10"/></svg>');
-  background-size: auto; 
-  background-position: center;
-  position: relative;
-}
-.screenshot-box span {
-  position: absolute; 
-  bottom: 5px; 
-  left: 5px; 
-  background: rgba(0,0,0,0.8);
-  color: #4caf50; 
-  font-size: 9px; 
-  padding: 2px 6px; 
-  border-radius: 4px; 
-  font-weight: bold;
-}
-/* 
-=========================
 МЕЛКИЙ ТЕКСТ В ПОДВАЛЕ
 =========================
 */
@@ -261,18 +219,6 @@ button:disabled {
     </form>
     <div class="status" 
     id="statusText"></div>
-    
-    <div class="gallery-title">
-      Скриншоты модулей
-    </div>
-    <div class="screenshot-grid">
-      <div class="screenshot-box">
-        <span>Killaura [Active]</span>
-      </div>
-      <div class="screenshot-box">
-        <span>Fly Bypass</span>
-      </div>
-    </div>
   </div>
 </div>
 
